@@ -2,6 +2,6 @@
 
 * Contains Latest version
 
-** TODO Make version [0/2]
+** TODO Make version 2 [1/2]
 + [ ] bigger pin header
-+ [ ] etc
++ [X] etc
