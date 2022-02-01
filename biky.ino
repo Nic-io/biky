@@ -8,7 +8,12 @@ void setup() {
   pinMode(A2, OUTPUT);
   pinMode(A3, OUTPUT);
   pinMode(A1, INPUT);
-  // pinMode(A5, OUTPUT);
+  pinMode(A4, OUTPUT);
+  pinMode(LED_BUILTIN, OUTPUT);
+  
+  digitalWrite(A4, LOW);
+  digitalWrite(A2, LOW);
+  digitalWrite(A3, LOW);
 }
 
 void turnLed(int pos, int value) {
@@ -21,31 +26,22 @@ void turnLed(int pos, int value) {
   if (pos >= 0 && pos <= 11) {
 
     if (pos > 5) {
-      digitalWrite(A3, LOW);
-      digitalWrite(A2, HIGH);
+      digitalWrite(A3, HIGH);
+      digitalWrite(A2, LOW);
       analogWrite(LEDpin[pos - 6], value); // analogRead values go from 0 to 1023, analogWrite values from 0 to 255
     }
     else {
-      digitalWrite(A3, HIGH);
-      digitalWrite(A2, LOW);
+      digitalWrite(A3, LOW);
+      digitalWrite(A2, HIGH);
       analogWrite(LEDpin[pos], value); // analogRead values go from 0 to 1023, analogWrite values from 0 to 255
     }
   }
   delay(1);
 }
 
-int getvalue(int val) {
-  if (val < 0) {
-    return 0;
-  }
-  else {
-    return values[val];
-  }
-}
 
-void startTrailing() {
-
-  for (int j = 0; j < 12; j++) {
+void turnLeft() {
+  for (int j = 0; j < 24; j++) {
     for (int i = 0; i < 3; i++) {
       turnLed(j, 255);
       turnLed(j - 1, 255);
@@ -61,36 +57,25 @@ void startTrailing() {
       turnLed(j - 11, 255);
     }
   }
-
-  digitalWrite(A2, HIGH);
-  digitalWrite(A3, HIGH);
-  analogWrite(LEDpin[0], 255); // analogRead values go from 0 to 1023, analogWrite values from 0 to 255
-  analogWrite(LEDpin[1], 255); // analogRead values go from 0 to 1023, analogWrite values from 0 to 255
-  analogWrite(LEDpin[2], 255); // analogRead values go from 0 to 1023, analogWrite values from 0 to 255
-  analogWrite(LEDpin[3], 255); // analogRead values go from 0 to 1023, analogWrite values from 0 to 255
-  analogWrite(LEDpin[4], 255); // analogRead values go from 0 to 1023, analogWrite values from 0 to 255
-  analogWrite(LEDpin[5], 255); // analogRead values go from 0 to 1023, analogWrite values from 0 to 255
-
-  for (int j = 255; j > 0 ; j--) {
-    analogWrite(LEDpin[0], j); // analogRead values go from 0 to 1023, analogWrite values from 0 to 255
-    analogWrite(LEDpin[1], j); // analogRead values go from 0 to 1023, analogWrite values from 0 to 255
-    analogWrite(LEDpin[2], j); // analogRead values go from 0 to 1023, analogWrite values from 0 to 255
-    analogWrite(LEDpin[3], j); // analogRead values go from 0 to 1023, analogWrite values from 0 to 255
-    analogWrite(LEDpin[4], j); // analogRead values go from 0 to 1023, analogWrite values from 0 to 255
-    analogWrite(LEDpin[5], j); // analogRead values go from 0 to 1023, analogWrite values from 0 to 255
-    delay(2);
-  }
-  delay(100);
-
   digitalWrite(A2, LOW);
   digitalWrite(A3, LOW);
+
 }
 
 void loop() {
-  //if(digitalRead(A1)){
-  //digitalWrite(A5,HIGH);
- // startTrailing();
-  // }
+  
+  static int numberloop=0;
+  numberloop++;
+  
+  turnLeft();
+  delay(300);
 
-  delay(10);
+  if(numberloop == 10){
+    digitalWrite(A4, HIGH);
+  }
+  if(numberloop == 12){
+    digitalWrite(A4, LOW);
+    numberloop = 0;
+  }
+
 }
