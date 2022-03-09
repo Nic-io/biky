@@ -42,7 +42,28 @@ void turnLed(int pos, int value) {
 
 void turnLeft() {
   for (int j = 0; j < 24; j++) {
-    for (int i = 0; i < 3; i++) {
+    for (int i = 0; i < 2; i++) {
+      turnLed(j, 255);
+      turnLed(j - 1, 255);
+      turnLed(j - 2, 255);
+      turnLed(j - 3, 255);
+      turnLed(j - 4, 255);
+      turnLed(j - 5, 255);
+      turnLed(j - 6, 255);
+      turnLed(j - 7, 255);
+      turnLed(j - 8, 255);
+      turnLed(j - 9, 255);
+      turnLed(j - 10, 255);
+      turnLed(j - 11, 255);
+    }
+  }
+  digitalWrite(A2, LOW);
+  digitalWrite(A3, LOW);
+}
+
+void turnRight() {
+  for (int j = 24; j > 0; j--) {
+    for (int i = 0; i < 2; i++) {
       turnLed(j, 255);
       turnLed(j - 1, 255);
       turnLed(j - 2, 255);
@@ -69,7 +90,9 @@ void loop() {
   
   turnLeft();
   delay(300);
-
+  turnRight();
+  delay(300);
+  
   if(numberloop == 10){
     digitalWrite(A4, HIGH);
   }
