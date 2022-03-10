@@ -1,0 +1,7 @@
+#+TITLE: PCB design of biky project
+
+* Contains Latest version
+
+** TODO Make version 2 [1/2]
++ [ ] bigger pin header
++ [X] etc
