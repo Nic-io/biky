@@ -158,7 +158,7 @@ void animateLights(){
      delay(100);
      digitalWrite(2, LOW);
      digitalWrite(4, LOW);
-     delay(1<00);
+     delay(100);
    }
    
    else if(global_control.reqLeft){
